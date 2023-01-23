@@ -1,0 +1,42 @@
+> ls
+level09  token
+
+> ltrace ./level09
+__libc_start_main(0x80487ce, 1, 0xbffff7f4, 0x8048aa0, 0x8048b10 <unfinished ...>
+ptrace(0, 0, 1, 0, 0xb7e2fe38)                                            = -1
+puts("You should not reverse this"You should not reverse this
+)                                       = 28
++++ exited (status 1) +++
+
+> mkdir /tmp/test
+
+> cd /tmp/test
+
+> vim test.c
+#include <unistd.h>
+#include <fnctl.h>
+
+int     main()
+{
+        char    byte;
+        int     i;
+        char    buf[99];
+
+        i = -1;
+        while (read(0, &byte, 1) > 0)
+                buf[++i] = byte - i;
+        buf[++i] = 0;
+        write(1, buf, i);
+        write(1, "\n", 1);
+        return (0);
+}
+
+> gcc test.c
+
+> cat /home/user/level09/token | ./a.out
+f3iji1ju5yuevaus41q1afiuq
+
+> su flag09 (last is password)
+
+> getflag
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z
